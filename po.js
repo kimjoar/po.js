@@ -34,18 +34,23 @@
         create: function() {
             var attrs = merge(arguments);
             return function ($el) {
-                return extend({ $el: $el }, attrs);
+                return extend({
+                    $el: $el,
+                    $: function(selector) {
+                        return this.$el.find(selector);
+                    }
+                }, attrs);
             }
         },
         input: function(selector) {
             return function(val) {
-                this.$el.find(selector).val(val).change();
+                this.$(selector).val(val).change();
                 return this;
             }
         },
         button: function(selector) {
             return function() {
-                this.$el.find(selector).click();
+                this.$(selector).click();
                 return this;
             }
         }

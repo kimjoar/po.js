@@ -23,6 +23,17 @@ describe('po', function() {
         expect(pageObject.$el).to.equal($el);
     });
 
+    it('has a $ helper to find inside $el', function() {
+        var $el = $('<div><h1>heading</h1></div>');
+        var pageObject = po.create({
+            header: function() {
+                return this.$('h1').text();
+            }
+        })($el);
+
+        expect(pageObject.header()).to.equal('heading');
+    });
+
     it('has an input helper which fills in input value', function() {
         var $el = $('<div><input class="author" type="text" value=""></div>');
 
