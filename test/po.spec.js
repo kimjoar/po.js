@@ -34,18 +34,30 @@ describe('po', function() {
         expect(pageObject.header()).to.equal('heading');
     });
 
-    it('has an input helper which fills in input value', function() {
-        var $el = $('<div><input class="author" type="text" value=""></div>');
+    describe('input fields', function() {
+        it('has an input helper which fills in input value', function() {
+            var $el = $('<div><input class="author" type="text" value=""></div>');
 
-        var pageObject = po.create({
-            author: po.input('.author')
-        })($el);
+            var pageObject = po.create({
+                author: po.input('.author')
+            })($el);
 
-        expect($el.find('.author').val()).to.equal('');
+            expect($el.find('.author').val()).to.equal('');
 
-        pageObject.author('kim');
+            pageObject.author('kim');
 
-        expect($el.find('.author').val()).to.equal('kim');
+            expect($el.find('.author').val()).to.equal('kim');
+        });
+
+        it('provides the input value', function() {
+            var $el = $('<div><input class="author" type="text" value="tim"></div>');
+
+            var pageObject = po.create({
+                author: po.input('.author')
+            })($el);
+
+            expect(pageObject.author()).to.equal('tim');
+        });
     });
 
     it('has button helper which clicks button when invoked', function(done) {

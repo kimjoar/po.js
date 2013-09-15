@@ -43,8 +43,13 @@
         },
         input: function(selector) {
             return function(val) {
-                this.$(selector).val(val).change();
-                return this;
+                var $input = this.$(selector);
+                if (val) {
+                    $input.val(val).change();
+                    return this;
+                } else {
+                    return $input.val();
+                }
             }
         },
         button: function(selector) {
