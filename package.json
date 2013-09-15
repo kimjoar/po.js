@@ -1,7 +1,7 @@
 {
   "name": "po.js",
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "node_modules/.bin/karma start karma.conf.js"
   },
   "devDependencies": {
     "karma-script-launcher": "~0.1.0",
