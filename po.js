@@ -1,8 +1,6 @@
 (function (root, factory) {
 
-    /*
-     * Export magic for node, AMD and the browser.
-     */
+    // Export magic for node, AMD and the browser.
     if (typeof define === 'function' && define.amd) define(factory);
     else if (typeof exports === 'object') module.exports = factory();
     else root.po = factory();
@@ -11,11 +9,11 @@
 
     var slice = Array.prototype.slice;
 
-    var toArray = function (array) {
+    var toArray = function(array) {
         return slice.call(array);
     };
 
-    var extend = function (src) {
+    var extend = function(src) {
         var objs = slice.call(arguments, 1);
         for (var i = 0; i < objs.length; i++) {
             for (var key in objs[i]) {
@@ -30,16 +28,17 @@
         return extend.apply(null, argsArray);
     };
 
+    var core = {
+        $: function(selector) {
+            return this.$el.find(selector);
+        }
+    };
+
     return {
         create: function() {
             var attrs = merge(arguments);
             return function ($el) {
-                return extend({
-                    $el: $el,
-                    $: function(selector) {
-                        return this.$el.find(selector);
-                    }
-                }, attrs);
+                return extend({ $el: $el }, core, attrs);
             }
         },
         input: function(selector) {
